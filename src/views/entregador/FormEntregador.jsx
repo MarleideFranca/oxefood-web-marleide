@@ -10,6 +10,7 @@ import {
   Icon,
   Input,
 } from "semantic-ui-react";
+import MenuSistema from '../../MenuSistema';
 
 const FormEntregador = () => {
   const [options, setOptions] = useState("");
@@ -22,6 +23,7 @@ const FormEntregador = () => {
 
   return (
     <div>
+         <MenuSistema tela={'Entregador'} />
       <div style={{ marginTop: "3%" }}>
         <Container textAlign="justified">
           <h2>
