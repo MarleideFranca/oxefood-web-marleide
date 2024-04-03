@@ -12,6 +12,27 @@ export default function FormProduto() {
     const [tempoDeEntregaMinimo, setTempoDeEntregaMinimo] = useState();
     const [entregaMaximoEmMinutos, setEntregaMaximoEmMinutos] = useState();
 
+    function salvar() {
+
+		let produtoRequest = {
+		     titulo: titulo,
+		     codigoDoProduto: codigoDoProduto,
+		     descricao: descricao,
+		     valorUnitario: valorUnitario,
+		     tempoDeEntregaMinimo: tempoDeEntregaMinimo,
+             tempoDeEntregaMaximo: tempoDeEntregaMaximo
+		}
+	
+		axios.post("http://localhost:8080/api/cliente", clienteRequest)
+		.then((response) => {
+		     console.log('Cliente cadastrado com sucesso.')
+		})
+		.catch((error) => {
+		     console.log('Erro ao incluir o um cliente.')
+		})
+	}
+
+
 
     return (
 
