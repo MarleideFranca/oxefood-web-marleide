@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, FormTextArea, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-export default function FormProduto () {
+export default function FormProduto() {
+
+    const [titulo, setTitulo] = useState();
+    const [codigoDoProduto, setCodigoDoProduto] = useState();
+    const [descricao, setDescricao] = useState();
+    const [valorUnitario, setValorUnitario] = useState();
+    const [tempoDeEntregaMinimo, setTempoDeEntregaMinimo] = useState();
+    const [entregaMaximoEmMinutos, setEntregaMaximoEmMinutos] = useState();
+
 
     return (
 
         <div>
-              <MenuSistema tela={'Produto'} />
+            <MenuSistema tela={'Produto'} />
 
-            <div style={{marginTop: '3%'}}>
+            <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{color: 'darkgray'}}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                    <h2> <span style={{ color: 'darkgray' }}> Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
 
                     <Divider />
 
-                    <div style={{marginTop: '4%'}}>
+                    <div style={{ marginTop: '4%' }}>
 
                         <Form>
 
@@ -29,28 +37,35 @@ export default function FormProduto () {
                                     fluid
                                     label='Título'
                                     maxLength="100"
-                                    > 
+                                    value={titulo}
+                                    onChange={e => setTitulo(e.target.value)}
+                                >
                                     <InputMask
-                                    placeholder="Informe o título do produto"/>
+                                        placeholder="Informe o título do produto" />
                                 </Form.Input>
 
                                 <Form.Input
                                     required
                                     fluid
                                     label='Código do Produto'>
+
                                     <InputMask
                                         placeholder="Informe o código do produto"
-                                    /> 
+                                        value={codigoDoProduto}
+                                        onChange={e => setCodigoDoProduto(e.target.value)}
+                                    />
                                 </Form.Input>
 
                             </Form.Group>
-                            
+
                             <Form.Group widths="equal">
 
                                 <FormTextArea
                                     label='Descrição'
                                     placeholder='Informe a descrição do produto'
-                                    >
+                                    value={descricao}
+                                    onChange={e => setDescricao(e.target.value)}
+                                >
                                 </FormTextArea>
 
                             </Form.Group>
@@ -61,33 +76,41 @@ export default function FormProduto () {
                                     fluid
                                     required
                                     label='Valor Unitário'
-                                    width={6}>
+                                    width={6}
+                                    value={valorUnitario}
+                                    onChange={e => setValorUnitario(e.target.value)}
+                                >
+
                                 </Form.Input>
 
                                 <Form.Input
                                     fluid
                                     label='Tempo de Entrega'
                                     width={6}>
-                                    <InputMask 
-                                       placeholder="30"
-                                    /> 
+                                    <InputMask
+                                        placeholder="30"
+                                        value={tempoDeEntregaMinimo}
+                                        onChange={e => setTempoDeEntregaMinimo(e.target.value)}
+                                    />
                                 </Form.Input>
 
                                 <Form.Input
                                     fluid
                                     label='Tempo de Entrega Máximo em Minutos'
                                     width={8}
+                                    value={entregaMaximoEmMinutos}
+                                    onChange={e => setEntregaMaximoEmMinutos(e.target.value)}
                                 >
-                                    <InputMask 
+                                    <InputMask
                                         placeholder="40"
-                                    /> 
+                                    />
                                 </Form.Input>
 
                             </Form.Group>
-                        
+
                         </Form>
-                        
-                        <div style={{marginTop: '4%'}}>
+
+                        <div style={{ marginTop: '4%' }}>
 
                             <Button
                                 type="button"
@@ -100,23 +123,25 @@ export default function FormProduto () {
                                 <Icon name='reply' />
                                 Listar
                             </Button>
-                                
+
                             <Button
                                 inverted
                                 circular
                                 icon
-                                labelPosition='left'
-                                color='blue'
-                                floated='right'
+                                labelPosition="left"
+                                color="blue"
+                                floated="right"
+                                onClick={() => salvar()}
+
                             >
-                                <Icon name='save' />
+                                <Icon name="save" />
                                 Salvar
                             </Button>
 
                         </div>
 
                     </div>
-                    
+
                 </Container>
             </div>
         </div>
