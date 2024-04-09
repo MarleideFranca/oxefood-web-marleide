@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, FormTextArea, Icon } from 'semantic-ui-react';
@@ -10,28 +11,29 @@ export default function FormProduto() {
     const [descricao, setDescricao] = useState();
     const [valorUnitario, setValorUnitario] = useState();
     const [tempoDeEntregaMinimo, setTempoDeEntregaMinimo] = useState();
-    const [entregaMaximoEmMinutos, setEntregaMaximoEmMinutos] = useState();
+    const [tempoDeEntregaMaximoEmMinutos, setTempoDeEntregaMaximoEmMinutos] = useState();
 
+    
     function salvar() {
 
-		let produtoRequest = {
-		     titulo: titulo,
-		     codigoDoProduto: codigoDoProduto,
-		     descricao: descricao,
-		     valorUnitario: valorUnitario,
-		     tempoDeEntregaMinimo: tempoDeEntregaMinimo,
-             tempoDeEntregaMaximo: tempoDeEntregaMaximo
-		}
-	
-		axios.post("http://localhost:8080/api/cliente", clienteRequest)
+        let produtoRequest = {
+            titulo: titulo,
+            codigoDoProduto: codigoDoProduto,
+            descricao: descricao,
+            valorUnitario: valorUnitario,
+            tempoDeEntregaMinimo: tempoDeEntregaMinimo,
+            tempoDeEntregaMaximoEmMinutos:tempoDeEntregaMaximoEmMinutos
+        }
+
+
+        axios.post("http://localhost:8080/api/produto", produtoRequest)
 		.then((response) => {
-		     console.log('Cliente cadastrado com sucesso.')
+		     console.log('Produto cadastrado com sucesso.')
 		})
 		.catch((error) => {
-		     console.log('Erro ao incluir o um cliente.')
+		     console.log('Erro ao incluir o um produto.')
 		})
 	}
-
 
 
     return (
@@ -119,8 +121,8 @@ export default function FormProduto() {
                                     fluid
                                     label='Tempo de Entrega Máximo em Minutos'
                                     width={8}
-                                    value={entregaMaximoEmMinutos}
-                                    onChange={e => setEntregaMaximoEmMinutos(e.target.value)}
+                                    value={tempoDeEntregaMaximoEmMinutos}
+                                    onChange={e => setTempoDeEntregaMaximoEmMinutos(e.target.value)}
                                 >
                                     <InputMask
                                         placeholder="40"

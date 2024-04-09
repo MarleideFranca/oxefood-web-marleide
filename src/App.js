@@ -19,11 +19,11 @@ function App() {
           size='tiny'
           textAlign='center'
         >
-          &copy; 2024 - Projeto WEB IV - IFPE Jaboatão dos Guararapes
+          &copy; 2024.1 - Projeto WEB IV - IFPE Jaboatão dos Guararapes
         </Segment>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
