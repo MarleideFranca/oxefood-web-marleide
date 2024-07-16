@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-export default function ListCliente() {
+export default function ListProduto() {
 
     const [lista, setLista] = useState([]);
 
@@ -32,7 +32,7 @@ export default function ListCliente() {
 
     return (
         <div>
-            <MenuSistema tela={'cliente'} />
+            <MenuSistema tela={'produto'} />
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
@@ -57,11 +57,12 @@ export default function ListCliente() {
 
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Nome</Table.HeaderCell>
-                                    <Table.HeaderCell>CPF</Table.HeaderCell>
-                                    <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Celular</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
+                                    <Table.HeaderCell>Titulo</Table.HeaderCell>
+                                    <Table.HeaderCell>codigo Do Produto</Table.HeaderCell>
+                                    <Table.HeaderCell>Descricao</Table.HeaderCell>
+                                    <Table.HeaderCell>Valor Unitario</Table.HeaderCell>
+                                    <Table.HeaderCell>Tempo de Entrega Minimo</Table.HeaderCell>
+                                    <Table.HeaderCell> Tempo de Entrega Maximo em Minutos</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
@@ -70,9 +71,9 @@ export default function ListCliente() {
 
                                 {lista.map(cliente => (
 
-                                    <Table.Row key={cliente.id}>
-                                        <Table.Cell>{cliente.nome}</Table.Cell>
-                                        <Table.Cell>{cliente.cpf}</Table.Cell>
+                                    <Table.Row key={produto.id}>
+                                        <Table.Cell>{produto.titulo}</Table.Cell>
+                                        <Table.Cell>{produto.codigoDoProduto}</Table.Cell>
                                         <Table.Cell>{formatarData(cliente.dataNascimento)}</Table.Cell>
                                         <Table.Cell>{cliente.foneCelular}</Table.Cell>
                                         <Table.Cell>{cliente.foneFixo}</Table.Cell>
@@ -84,9 +85,8 @@ export default function ListCliente() {
                                                 color='green'
                                                 title='Clique aqui para editar os dados deste cliente'
                                                 icon>
-                                                <Link to="/form-cliente" state={{ id: cliente.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
-                                            </Button>
-
+                                                <Icon name='edit' />
+                                            </Button> &nbsp;
 
 
                                             <Button

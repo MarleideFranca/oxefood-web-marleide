@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-export default function ListCliente() {
+export default function ListPromocao() {
 
     const [lista, setLista] = useState([]);
 
@@ -14,7 +14,7 @@ export default function ListCliente() {
 
     function carregarLista() {
 
-        axios.get("http://localhost:8080/api/cliente")
+        axios.get("http://localhost:8080/api/promocao")
             .then((response) => {
                 setLista(response.data)
             })
@@ -32,7 +32,7 @@ export default function ListCliente() {
 
     return (
         <div>
-            <MenuSistema tela={'cliente'} />
+            <MenuSistema tela={'promocao'} />
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
@@ -48,7 +48,7 @@ export default function ListCliente() {
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
-                            to='/form-cliente'
+                            to='/form-promocao'
                         />
 
                         <br /><br /><br />
@@ -57,25 +57,27 @@ export default function ListCliente() {
 
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Nome</Table.HeaderCell>
-                                    <Table.HeaderCell>CPF</Table.HeaderCell>
-                                    <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Celular</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
+                                    <Table.HeaderCell>Titulo</Table.HeaderCell>
+                                    <Table.HeaderCell>Regra</Table.HeaderCell>
+                                    <Table.HeaderCell>Valor Desconto (R$)</Table.HeaderCell>
+                                    <Table.HeaderCell>A partir de</Table.HeaderCell>
+                                    <Table.HeaderCell>Terminado em</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
 
-                                {lista.map(cliente => (
+                                {lista.map(promocao => (
 
-                                    <Table.Row key={cliente.id}>
-                                        <Table.Cell>{cliente.nome}</Table.Cell>
-                                        <Table.Cell>{cliente.cpf}</Table.Cell>
-                                        <Table.Cell>{formatarData(cliente.dataNascimento)}</Table.Cell>
-                                        <Table.Cell>{cliente.foneCelular}</Table.Cell>
-                                        <Table.Cell>{cliente.foneFixo}</Table.Cell>
+                                    <Table.Row key={promocao.id}>
+                                        <Table.Cell>{promocao.titulo}</Table.Cell>
+                                        <Table.Cell>{promocao.regra}</Table.Cell>
+                                        <Table.Cell>{promocao.valorDesconto}</Table.Cell>
+                                        <Table.Cell>{formatarData(promocao.dataInicio)}</Table.Cell>
+                                        <Table.Cell>{formatarData(promocao.dataFim)}</Table.Cell>
+
+
                                         <Table.Cell textAlign='center'>
 
                                             <Button
@@ -88,12 +90,11 @@ export default function ListCliente() {
                                             </Button>
 
 
-
                                             <Button
                                                 inverted
                                                 circular
                                                 color='red'
-                                                title='Clique aqui para remover este cliente'
+                                                title='Clique aqui para remover esta promocao'
                                                 icon>
                                                 <Icon name='trash' />
                                             </Button>

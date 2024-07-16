@@ -5,44 +5,44 @@ import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 import { Link, useLocation } from "react-router-dom";
 
-export default function FormCliente() {
+export default function FormPromocao() {
 
     const { state } = useLocation();
     const [idCliente, setIdCliente] = useState();
 
-    /*useEffect(() => {
+    useEffect(() => {
         if (state != null && state.id != null) {
-            axios.get("http://localhost:8080/ api/cliente/" + state.id)
+            axios.get("http://localhost:8080/ api/promocao/" + state.id)
                 .then((response) => {
-                    setIdCliente(response.data.id)
-                    setNome(response.data.nome)
-                    setCpf(response.data.cpf)
-                    setDataNascimento(response.data.dataNascimento)
-                    setFoneCelular(response.data.foneCelular)
-                    setFoneFixo(response.data.foneFixo)
-*/
-                    const [nome, setNome] = useState();
-                    const [cpf, setCpf] = useState();
-                    const [dataNascimento, setDataNascimento] = useState();
-                    const [foneCelular, setFoneCelular] = useState();
-                    const [foneFixo, setFoneFixo] = useState();
+                    setIdPromocao(response.data.id)
+                    setTitulo(response.data.titulo)
+                    setRegra(response.data.regra)
+                    setValorDesconto(response.data.valorDesconto)
+                    setDataInicio(response.data.dataInicio)
+                    setDataFim(response.data.dataFim)
+
+                    const [titulo, setTitulo] = useState();
+                    const [regra, setRegra] = useState();
+                    const [valorDesconto, setValorDesconto] = useState();
+                    const [dataInicio, setDataInicio] = useState();
+                    const [fonedataFim, setDataFim] = useState();
 
                     function salvar() {
 
                         let clienteRequest = {
-                            nome: nome,
-                            cpf: cpf,
-                            dataNascimento: dataNascimento,
-                            foneCelular: foneCelular,
-                            foneFixo: foneFixo
+                            titulo: titulo,
+                            regra: regra,
+                            valorDesconto: valorDesconto,
+                            dataInicio: dataInicio,
+                            dataFim: dataFim
                         }
 
-                        axios.post("http://localhost:8080/api/cliente", clienteRequest)
+                        axios.post("http://localhost:8080/api/promocao", promocaoRequest)
                             .then((response) => {
-                                console.log('Cliente cadastrado com sucesso.')
+                                console.log('Promoção cadastrada com sucesso.')
                             })
                             .catch((error) => {
-                                console.log('Erro ao incluir o um cliente.')
+                                console.log('Erro ao incluir o uma promoção.')
                             })
                     }
 
@@ -52,13 +52,13 @@ export default function FormCliente() {
                     return (
 
                         <div>
-                            <MenuSistema tela={'Cliente'} />
+                            <MenuSistema tela={'Promoção'} />
 
                             <div style={{ marginTop: '3%' }}>
 
                                 <Container textAlign='justified' >
 
-                                    <h2> <span style={{ color: 'darkgray' }}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                                    <h2> <span style={{ color: 'darkgray' }}> Promoção &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
 
                                     <Divider />
 
@@ -71,22 +71,22 @@ export default function FormCliente() {
                                                 <Form.Input
                                                     required
                                                     fluid
-                                                    label='Nome'
+                                                    label='Título'
                                                     maxLength="100"
-                                                    value={nome}
-                                                    onChange={e => setNome(e.target.value)}
+                                                    value={titulo}
+                                                    onChange={e => setTitulo(e.target.value)}
 
                                                 />
 
                                                 <Form.Input
-                                                    required
+                                                    //required
                                                     fluid
-                                                    label='CPF'>
+                                                    label='Regra'>
                                                     <InputMask
                                                         required
                                                         mask="999.999.999-99"
-                                                        value={cpf}
-                                                        onChange={e => setCpf(e.target.value)}
+                                                        value={regra}
+                                                        onChange={e => setRegra(e.target.value)}
                                                     />
                                                 </Form.Input>
 
@@ -96,37 +96,39 @@ export default function FormCliente() {
 
                                                 <Form.Input
                                                     fluid
-                                                    label='Fone Celular'
+                                                    label='Valor Desconto (R$)'
                                                     width={6}>
                                                     <InputMask
                                                         mask="(99) 9999.9999"
-                                                        value={foneCelular}
-                                                        onChange={e => setFoneCelular(e.target.value)}
+                                                        value={valorDesconto}
+                                                        onChange={e => setValorDesconto(e.target.value)}
                                                     />
                                                 </Form.Input>
 
                                                 <Form.Input
+                                                    required
                                                     fluid
-                                                    label='Fone Fixo'
+                                                    label='A partir de'
                                                     width={6}>
                                                     <InputMask
                                                         mask="(99) 9999.9999"
-                                                        value={foneFixo}
-                                                        onChange={e => setFoneFixo(e.target.value)}
+                                                        value={dataInicio}
+                                                        onChange={e => setDataInicio(e.target.value)}
                                                     />
                                                 </Form.Input>
 
                                                 <Form.Input
+                                                    required
                                                     fluid
-                                                    label='Data Nascimento'
+                                                    label='Terminado em'
                                                     width={6}
                                                 >
                                                     <InputMask
                                                         mask="99/99/9999"
                                                         maskChar={null}
                                                         placeholder="Ex: 20/03/1985"
-                                                        value={dataNascimento}
-                                                        onChange={e => setDataNascimento(e.target.value)}
+                                                        value={dataFim}
+                                                        onChange={e => setDataFim(e.target.value)}
                                                     />
                                                 </Form.Input>
 
@@ -145,7 +147,7 @@ export default function FormCliente() {
                                                 color='orange'
                                             >
                                                 <Icon name='reply' />
-                                                <Link to={'/list-cliente'}>Voltar</Link>
+                                                <Link to={'/list-promocao'}>Voltar</Link>
 
                                             </Button>
 
