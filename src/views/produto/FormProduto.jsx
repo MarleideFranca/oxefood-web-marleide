@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-//import InputMask from "react-input-mask"
+import InputMask from "react-input-mask"
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
 
@@ -98,7 +98,7 @@ export default function FormProduto() {
               {" "}
               <span style={{ color: "darkgray" }}>
                 {" "}
-                Cliente &nbsp;
+                Produto &nbsp;
                 <Icon name="angle double right" size="small" />{" "}
               </span>{" "}
               Alteração

@@ -11,6 +11,7 @@ import {
   Header,
 } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
+import FormCategoriaProduto from "./FormCategoriaProduto";
 
 export default function ListProduto() {
   const [lista, setLista] = useState([]);
@@ -28,22 +29,22 @@ export default function ListProduto() {
 
   async function remover() {
     await axios
-      .delete("http://localhost:8080/api/produto/" + idRemover)
+      .delete("http://localhost:8080/api/categoriaProduto/" + idRemover)
       .then((response) => {
-        console.log("Produto removido com sucesso.");
+        console.log("Categoria de Produto removido com sucesso.");
 
-        axios.get("http://localhost:8080/api/produto").then((response) => {
+        axios.get("http://localhost:8080/api/categoriaProduto").then((response) => {
           setLista(response.data);
         });
       })
       .catch((error) => {
-        console.log("Erro ao remover um produto.");
+        console.log("Erro ao remover uma categoria de produto.");
       });
     setOpenModal(false);
   }
 
   function carregarLista() {
-    axios.get("http://localhost:8080/api/produto").then((response) => {
+    axios.get("http://localhost:8080/api/categoriaProduto").then((response) => {
       setLista(response.data);
     });
   }
@@ -58,10 +59,10 @@ export default function ListProduto() {
   }
   return (
     <div>
-      <MenuSistema tela={"produto"} />
+      <MenuSistema tela={"categoria de produto"} />
       <div style={{ marginTop: "3%" }}>
         <Container textAlign="justified">
-          <h2> Produto </h2>
+          <h2>  Categoria de Produto </h2>
           <Divider />
 
           <div style={{ marginTop: "4%" }}>
@@ -72,7 +73,7 @@ export default function ListProduto() {
               icon="clipboard outline"
               floated="right"
               as={Link}
-              to="/form-produto"
+              to="/form-categoriaProduto"
             />
             <br />
             <br />
@@ -81,38 +82,28 @@ export default function ListProduto() {
             <Table color="orange" sortable celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Código</Table.HeaderCell>
-                  <Table.HeaderCell>Categoria</Table.HeaderCell>
-                  <Table.HeaderCell>Título</Table.HeaderCell>
-                  <Table.HeaderCell>Descrição</Table.HeaderCell>
-                  <Table.HeaderCell>valorUnitario</Table.HeaderCell>
-                  <Table.HeaderCell>tempoEntregaMinimo</Table.HeaderCell>
-                  <Table.HeaderCell>tempoEntregaMáximo</Table.HeaderCell>
+                  <Table.HeaderCell>Descrição</Table.HeaderCell>  
                   <Table.HeaderCell textAlign="center">Ações</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
-             /* <Table.Body>
-                {lista.map((produto) => (
-                  <Table.Row key={produto.id}>
-                    <Table.Cell>{produto.codigo}</Table.Cell>
-                    <Table.Cell>{produto.categoria.descricao}</Table.Cell>
-                    <Table.Cell>{produto.titulo}</Table.Cell>
-                    <Table.Cell>{produto.descricao}</Table.Cell>
-                    <Table.Cell>{produto.valorUnitario}</Table.Cell>
-                    <Table.Cell>{produto.tempoEntregaMinimo}</Table.Cell>
-                    <Table.Cell>{produto.tempoEntregaMaximo}</Table.Cell>
-                    <Table.Cell textAlign="center">*/
+              <Table.Body>
+                {lista.map((categoriaProduto) => (
+                  <Table.Row key={FormCategoriaProduto.id}>
+                    <Table.Cell>{categoriaProduto.descricao}</Table.Cell>
+                    
+                   
+                    <Table.Cell textAlign="center">
                       <Button
                         inverted
                         circular
                         color="green"
-                        title="Clique aqui para editar os dados deste produto"
+                        title="Clique aqui para editar os dados desta categoria de  produto"
                         icon
                       >
                         <Link
-                          to="/form-produto"
-                          state={{ id: produto.id }}
+                          to="/form-categoriaProduto"
+                          state={{ id: categoriaProduto.id }}
                           style={{ color: "green" }}
                         >
                           {" "}
@@ -124,9 +115,9 @@ export default function ListProduto() {
                         inverted
                         circular
                         color="red"
-                        title="Clique aqui para remover este produto"
+                        title="Clique aqui para remover esta categoria de produto"
                         icon
-                        onClick={(e) => confirmaRemover(produto.id)}
+                        onClick={(e) => confirmaRemover(categoriaProduto.id)}
                       >
                         <Icon name="trash" />
                       </Button>
